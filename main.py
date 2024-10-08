@@ -19,7 +19,7 @@ def paginaInicial(request: Request):
   return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/cadastro", response_class=HTMLResponse)
-async def cadastro(request: Request):
+def cadastro(request: Request):
   return templates.TemplateResponse("cadastro.html", {"request": request})
 
 @app.get("/cadastro_recebido")
@@ -45,4 +45,5 @@ def post_cadastro(
 
 
 if __name__ == "__main__":
+  produto_repo.criar_tabela()
   uvicorn.run("main:app", port=8000, reload=True)

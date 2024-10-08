@@ -11,7 +11,7 @@ SQL_CRIAR_TABELA ="""
 
 SQL_INSERIR = """
     INSERT INTO produto (
-        id, nome, descricao, estoque, preco, categoria)
+         nome, descricao, estoque, preco, categoria)
     VALUES (?, ?, ?, ?, ?)
 """
 
