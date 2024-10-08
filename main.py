@@ -5,6 +5,9 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from starlette.requests import Request
 import uvicorn
 
+from PW20242_Atividade1.models.produto_model import Produto
+from PW20242_Atividade1.repositories import produto_repo
+
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
@@ -19,6 +22,10 @@ def paginaInicial(request: Request):
 async def cadastro(request: Request):
   return templates.TemplateResponse("cadastro.html", {"request": request})
 
+@app.get("/cadastro_recebido")
+def get_contato(request: Request):
+  return templates.TemplateResponse("cadastro_recebido.html", {"request": request})
+
 @app.post("/post_cadastro")
 def post_cadastro(
     nome: str = Form(...), 
@@ -26,7 +33,15 @@ def post_cadastro(
     estoque: int = Form(...),
     preco: float = Form(...), 
     categoria: str = Form(...)):
-  return RedirectResponse("/", status_code=303)
+  
+  produto = Produto(None, nome, descricao, estoque, preco, categoria)
+  produto = produto_repo.inserir(produto)
+
+  if produto:
+    return RedirectResponse("/cadastro_recebido", 303)
+  else: return RedirectResponse("/cadastro", 303)
+  
+
 
 
 if __name__ == "__main__":

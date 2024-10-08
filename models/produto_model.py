@@ -4,7 +4,7 @@ from typing import Optional
 
 
 @dataclass
-class Usuario:
+class Produto:
     id: Optional[int] = None 
     nome: Optional[str] = None 
     descricao: Optional[str] = None 
