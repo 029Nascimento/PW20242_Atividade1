@@ -5,8 +5,8 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from starlette.requests import Request
 import uvicorn
 
-from PW20242_Atividade1.models.produto_model import Produto
-from PW20242_Atividade1.repositories import produto_repo
+from models.produto_model import Produto
+from repositories import produto_repo
 
 app = FastAPI()
 
